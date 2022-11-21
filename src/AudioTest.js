@@ -34,8 +34,15 @@ export default function AudioTest() {
   });
 
   const onSend = async messages => {
+    console.log('voice aa gi', path);
     console.log('voice aa gi', voice);
+
+    // ------------------MAKIN BUFFER OF VOICE-------------------
+    const voce = await RNFetchBlob.fs.readFile(path);
+    console.log(voce); //BUFFER IS HERE VOCE
+
     const formData = new FormData();
+
     formData.append('voice', {
       name: `voice ${new Date()} `,
       uri: voice.path,
@@ -44,7 +51,7 @@ export default function AudioTest() {
     formData.append('text', ' messages[0].text');
     formData.append('receiver', '6377afd549de4bb1f0168c73');
     console.log('====================================');
-    console.log(formData);
+    // console.log(...formData.get);
     console.log('====================================');
     console.log(formData._parts[0]);
   };
@@ -107,8 +114,8 @@ export default function AudioTest() {
     // setStartAudio(false);
     SetVoice(null);
     const aud = await Record.stopRecorder();
-    console.log(Record.mmss());
-    console.log(aud);
+
+    console.log(aud, 'FROM STOP');
     // const chunk = Buffer.from(aud, 'base64');
     // const blob = new Blob([Buffer(aud, 'data')]);
     // console.log('BLOB', blob);
